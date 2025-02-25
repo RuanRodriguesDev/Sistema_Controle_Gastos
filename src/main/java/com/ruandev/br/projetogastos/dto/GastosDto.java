@@ -1,32 +1,26 @@
-package com.ruandev.br.projetogastos.entities;
+package com.ruandev.br.projetogastos.dto;
 
-import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "gastos")
-public class Gastos {
+import com.ruandev.br.projetogastos.entities.Gastos;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GastosDto {
     private Long id;
-
-    @Column(nullable = false)
     private String nome;
-
-    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd") // 🔹 Garante formato correto no JSON
-    @Column(nullable = false)
     private LocalDate date;
-
-    @Column(nullable = false)
     private String categoria;
 
-    // ✅ Getters e Setters são essenciais para o Jackson funcionar corretamente
+    public GastosDto(Gastos gastos) {
+        this.id = gastos.getId();
+        this.nome = gastos.getNome();
+        this.valor = gastos.getValor();
+        this.date = gastos.getDate();
+        this.categoria = gastos.getCategoria();
+    }
+
+    // ✅ Getters e Setters
     public Long getId() {
         return id;
     }
